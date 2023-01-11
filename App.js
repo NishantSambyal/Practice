@@ -1,61 +1,59 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TextInput,
-  Touchable,
-  TouchableOpacity,
-  Button,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, Button} from 'react-native';
 import React, {Component} from 'react';
-import {instaImage} from './assets';
+import Counter from './Counter';
+import Login from './Login';
+import Header from './Header';
 
-export class App extends Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      screen: 0, // 1
+    };
+  }
+
+  renderScreen = () => {
+    switch (this.state.screen) {
+      case 1: {
+        return <Login />;
+      }
+      case 2: {
+        return <Counter />;
+      }
+      default: {
+        return null;
+      }
+    }
+  };
+
+  // renderButtons = () => {
+  //   return (
+  //     <View>
+  //       <Button
+  //         title="Go to Login"
+  //         onPress={() => this.setState({screen: 0})} //This is for Login
+  //       />
+  //       <Button
+  //         title="Go to Counter"
+  //         onPress={() => this.setState({screen: 1})} // THis is for Counter
+  //       />
+  //     </View>
+  //   );
+  // };
+
   render() {
     return (
       <View style={styles.main}>
-        <Image
-          resizeMode="contain"
-          style={styles.tinyLogo}
-          source={instaImage}
+        <Header />
+        <Button
+          title="Go to Login"
+          onPress={() => this.setState({screen: 1})} //This is for Login
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          // onChangeText={onChangeText}
+        <Button
+          title="Go to Counter"
+          onPress={() => this.setState({screen: 2})} // THis is for Counter
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          // onChangeText={onChangeText}
-          // value={text}
-        />
-        <TouchableOpacity style={{width: '90%'}}>
-          <Text
-            style={{
-              textAlign: 'right',
-              textDecorationLine: 'underline',
-              color: 'skyblue',
-            }}>
-            Forgot password?
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{width: '90%'}}>
-          <View style={{marginTop: 60, backgroundColor: 'skyblue'}}>
-            <Text
-              style={{
-                paddingVertical: 10,
-                color: 'white',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }}>
-              Log In
-            </Text>
-          </View>
-        </TouchableOpacity>
+        {this.renderScreen()}
       </View>
     );
   }
@@ -63,27 +61,10 @@ export class App extends Component {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1, // capture entire parent space
-    justifyContent: 'center', // vertical center
-    alignItems: 'center', //horizontal center
-    // borderWidth: 5,
-    // borderColor: 'red'
-  },
-  tinyLogo: {
-    width: '90%',
-    height: 100,
-    marginBottom: 80,
-  },
-  input: {
-    width: '90%',
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderColor: '#cccccc',
-    borderRadius: 6,
-    backgroundColor: '#e5e5e5',
+    flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // marginTop: 40,
+    width: '100%',
   },
 });
-
-export default App;

@@ -1,4 +1,11 @@
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import React, {Component} from 'react';
 
 export class Counter extends Component {
@@ -19,10 +26,6 @@ export class Counter extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Counter Application</Text>
-        </View>
-
         <View style={styles.bodyView}>
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
@@ -50,7 +53,7 @@ export class Counter extends Component {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'green',
-    height: 100,
+    height: Platform.OS === 'ios' ? 100 : 60,
     justifyContent: 'center',
   },
   headerTitle: {
@@ -72,3 +75,7 @@ const styles = StyleSheet.create({
   },
 });
 export default Counter;
+
+//create a file Header.js
+//Design header with some background color and text on it with a back button
+//Use that header in 2 or more screens..
