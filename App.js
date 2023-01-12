@@ -1,70 +1,24 @@
-import {View, StyleSheet, Button} from 'react-native';
-import React, {Component} from 'react';
+import {View, Text} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Counter from './Counter';
 import Login from './Login';
-import Header from './Header';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      screen: 0, // 1
-    };
-  }
-
-  renderScreen = () => {
-    switch (this.state.screen) {
-      case 1: {
-        return <Login />;
-      }
-      case 2: {
-        return <Counter />;
-      }
-      default: {
-        return null;
-      }
-    }
-  };
-
-  // renderButtons = () => {
-  //   return (
-  //     <View>
-  //       <Button
-  //         title="Go to Login"
-  //         onPress={() => this.setState({screen: 0})} //This is for Login
-  //       />
-  //       <Button
-  //         title="Go to Counter"
-  //         onPress={() => this.setState({screen: 1})} // THis is for Counter
-  //       />
-  //     </View>
-  //   );
-  // };
-
-  render() {
-    return (
-      <View style={styles.main}>
-        <Header />
-        <Button
-          title="Go to Login"
-          onPress={() => this.setState({screen: 1})} //This is for Login
+const App = () => {
+  const Stack = createNativeStackNavigator();
+  return (
+    <NavigationContainer>
+      <Stack.Navigator name="loginStack">
+        <Stack.Screen
+          name="Counter"
+          component={Counter}
+          options={{title: 'Counter appliation'}}
         />
-        <Button
-          title="Go to Counter"
-          onPress={() => this.setState({screen: 2})} // THis is for Counter
-        />
-        {this.renderScreen()}
-      </View>
-    );
-  }
-}
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // marginTop: 40,
-    width: '100%',
-  },
-});
+export default App;

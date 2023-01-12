@@ -23,6 +23,11 @@ export class Counter extends Component {
     this.setState({counter: this.state.counter - 1});
   };
 
+  navigateToLogin = () => {
+    const {navigation} = this.props;
+    navigation.navigate('Login');
+  };
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -44,6 +49,12 @@ export class Counter extends Component {
               <Text style={styles.buttonText}>Increment</Text>
             </TouchableOpacity>
           </View>
+
+          <TouchableOpacity
+            onPress={() => this.navigateToLogin()}
+            style={{backgroundColor: 'skyblue', justifyContent: 'center'}}>
+            <Text style={styles.buttonText}>Move to Login</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
